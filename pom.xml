@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.jianjang.docker</groupId>
 	<artifactId>docker-demo</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>docker-demo</name>
 	<description>Docker Demo project for Spring Boot</description>
 
@@ -47,6 +47,29 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.13</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<repository>registry.cn-shanghai.aliyuncs.com/zhangjian_sh/docker-demo</repository>
+					<tag>${project.version}</tag>
+					<username>zhangjian20200721</username>
+					<password>zwx112435</password>
+					<buildArgs>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
